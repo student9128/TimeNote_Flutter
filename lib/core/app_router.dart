@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'AppRouter.gr.dart';
+import 'app_router.gr.dart';
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter{
   

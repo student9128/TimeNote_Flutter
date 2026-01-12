@@ -31,28 +31,29 @@ void main() {
       repeatMode: RepeatMode.once,
       remind: false,
     );
+    final countdownDao = db.countdownDao;
 
-    final id = await db.insertCountdown(model);
+    final id = await countdownDao.insertCountdown(model);
     expect(id, greaterThan(0));
 
-    final all = await db.getAllCountdowns();
+    final all = await countdownDao.getAllCountdowns();
     expect(all.length, 1);
 
-    final fetched = await db.getCountdownById(id);
+    final fetched = await countdownDao.getCountdownById(id);
     expect(fetched, isNotNull);
     expect(fetched!.title, 'Test event');
 
     final updatedModel = fetched.copyWith(title: 'Updated');
-    final ok = await db.updateCountdown(updatedModel);
+    final ok = await countdownDao.updateCountdown(updatedModel);
     expect(ok, isTrue);
 
-    final fetched2 = await db.getCountdownById(id);
+    final fetched2 = await countdownDao.getCountdownById(id);
     expect(fetched2!.title, 'Updated');
 
-    final deleted = await db.deleteCountdown(id);
+    final deleted = await countdownDao.deleteCountdown(id);
     expect(deleted, 1);
 
-    final remaining = await db.getAllCountdowns();
+    final remaining = await countdownDao.getAllCountdowns();
     expect(remaining.length, 0);
   });
 }
